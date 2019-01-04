@@ -1,0 +1,4413 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>TbT API | TbT Platform Docs</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="TbT API" />
+<meta name="author" content="MelKori" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TbT Docs at GitHub Pages." />
+<meta property="og:description" content="TbT Docs at GitHub Pages." />
+<link rel="canonical" href="http://localhost:4000/2018/11/01/api.html" />
+<meta property="og:url" content="http://localhost:4000/2018/11/01/api.html" />
+<meta property="og:site_name" content="TbT Platform Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-11-01T01:00:00+02:00" />
+<script type="application/ld+json">
+{"description":"TbT Docs at GitHub Pages.","author":{"@type":"Person","name":"MelKori"},"@type":"BlogPosting","url":"http://localhost:4000/2018/11/01/api.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/logo.png"},"name":"MelKori"},"headline":"TbT API","dateModified":"2018-11-01T01:00:00+02:00","datePublished":"2018-11-01T01:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/11/01/api.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=4354cebd9a0dc293bc6d3ed7fe4d9c69fbc758f3">
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/">TbT Platform Docs</a></h1>
+
+        
+          <img src="/images/logo.png" alt="Logo" />
+        
+
+        <p>TbT Docs at GitHub Pages.</p>
+
+        
+        <p class="view"><a href="http://github.com/blackforest6230/tbt-post.github.io">View the Project on GitHub <small>blackforest6230/tbt-post.github.io</small></a></p>
+        
+
+        
+
+        
+        <ul class="downloads">
+          <li><a href="https://github.com/tbt-post/tbtapi-docs/zipball/master/">Download docs<strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/tbt-post/tbtapi-docs/tarball/master/">Download docs<strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/tbt-post/tbtapi-docs">View docs on <strong>GitHub</strong></a></li>
+        </ul>
+        
+      </header>
+      <section>
+
+      <h1>TbT API</h1>
+<p>01 Nov 2018 - MelKori</p>
+
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#Общая-информация">Общая информация</a>
+<ul class="sectlevel2">
+<li><a href="#Форматы-протокола">Форматы протокола</a></li>
+<li><a href="#Типы-данных">Типы данных</a></li>
+<li><a href="#http-Методы">HTTP Методы</a></li>
+<li><a href="#http-Статусы">HTTP Статусы</a></li>
+</ul>
+</li>
+<li><a href="#api">API</a>
+<ul class="sectlevel2">
+<li><a href="#Регистрация">Регистрация</a>
+<ul class="sectlevel3">
+<li><a href="#Создание-пользователя">Создание пользователя</a></li>
+<li><a href="#Создание-пользователя-оператором">Создание пользователя оператором</a></li>
+<li><a href="#Потдтверждение-регистрации">Потдтверждение регистрации</a>
+<ul class="sectlevel4">
+<li><a href="#Запрос-ОТС">Запрос ОТС</a></li>
+<li><a href="#Подтверждение">Подтверждение</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Вход">Вход</a></li>
+<li><a href="#Выход">Выход</a></li>
+<li><a href="#Восстановление-пароля">Восстановление пароля</a>
+<ul class="sectlevel3">
+<li><a href="#Запрос-ОТС-2">Запрос ОТС</a></li>
+<li><a href="#Превалидация-ОТС">Превалидация ОТС</a></li>
+<li><a href="#Изменение-пароля">Изменение пароля</a></li>
+</ul>
+</li>
+<li><a href="#Изменение-пароля-2">Изменение пароля</a></li>
+<li><a href="#Пользовательский-профиль">Пользовательский профиль</a>
+<ul class="sectlevel3">
+<li><a href="#Получение-собственного-профиля">Получение собственного профиля</a></li>
+<li><a href="#Обновление-собственного-профиля">Обновление собственного профиля</a></li>
+<li><a href="#Получение-базовых-данных-пользователя">Получение базовых данных пользователя</a></li>
+<li><a href="#Получение-базовых-данных-списка-пользователей">Получение базовых данных списка пользователей</a></li>
+<li><a href="#Получение-профиля-пользователя">Получение профиля пользователя</a></li>
+<li><a href="#Обновление-профиля-пользователя">Обновление профиля пользователя</a></li>
+<li><a href="#Подтверждение-профиля-пользователя-оператором">Подтверждение профиля пользователя оператором</a></li>
+<li><a href="#Получение-списка-пользователей-по-id">Получение списка пользователей по id</a></li>
+<li><a href="#Поиск-пользователей">Поиск пользователей</a></li>
+</ul>
+</li>
+<li><a href="#Вход-по-номеру-телефона">Вход по номеру телефона</a>
+<ul class="sectlevel3">
+<li><a href="#Запрос-кода">Запрос кода</a></li>
+<li><a href="#Авторизация">Авторизация</a></li>
+</ul>
+</li>
+<li><a href="#Изменение-телефона">Изменение телефона</a>
+<ul class="sectlevel3">
+<li><a href="#Запрос-ОТС-3">Запрос ОТС</a></li>
+<li><a href="#Подтверждение-2">Подтверждение</a></li>
+</ul>
+</li>
+<li><a href="#Изменение-email">Изменение email</a>
+<ul class="sectlevel3">
+<li><a href="#Запрос-ОТС-4">Запрос ОТС</a></li>
+<li><a href="#Подтверждение-3">Подтверждение</a></li>
+</ul>
+</li>
+<li><a href="#acl">ACL</a>
+<ul class="sectlevel3">
+<li><a href="#Роли-пользоватлея">Роли пользоватлея</a></li>
+</ul>
+</li>
+<li><a href="#Посылки">Посылки</a>
+<ul class="sectlevel3">
+<li><a href="#Получение-по-idcode">Получение по id/code</a></li>
+<li><a href="#Получение-графических-кодов">Получение графических кодов</a></li>
+<li><a href="#Поиск">Поиск</a></li>
+<li><a href="#Получение-посылок-по-списку-id">Получение посылок по списку id</a></li>
+<li><a href="#cписок-посылок-пользователя">Cписок посылок пользователя</a></li>
+<li><a href="#Создание-посылки">Создание посылки</a></li>
+<li><a href="#Изменение-посылки">Изменение посылки</a></li>
+<li><a href="#Статистика-по-посылкам-для-отделения">Статистика по посылкам для отделения</a></li>
+<li><a href="#Сгруппированный-список-посылок-для-отделения">Сгруппированный список посылок для отделения</a></li>
+<li><a href="#Статистика-по-посылкам-для-пользователя">Статистика по посылкам для пользователя</a></li>
+<li><a href="#Трекинговая-информация-о-пользовательских-посылках">Трекинговая информация о пользовательских посылках</a></li>
+</ul>
+</li>
+<li><a href="#Адреса-и-отделения">Адреса и отделения</a>
+<ul class="sectlevel3">
+<li><a href="#Получения-данных-отделений">Получения данных отделений</a></li>
+<li><a href="#Список-адресов-отделений">Список адресов отделений</a></li>
+<li><a href="#Получение-адреса-из-справочника">Получение адреса из справочника</a></li>
+<li><a href="#Получение-списка-фильтров-агрегации-адресов">Получение списка фильтров (агрегации) адресов</a></li>
+<li><a href="#Создание-адреса-в-справочнике">Создание адреса в справочнике</a></li>
+<li><a href="#Список-пользовательских-адресов">Список пользовательских адресов</a></li>
+<li><a href="#Добавление-пользовательского-адреса">Добавление пользовательского адреса</a></li>
+<li><a href="#Список-пользовательских-адресов-произвольного-пользователя">Список пользовательских адресов произвольного пользователя</a></li>
+<li><a href="#Добавление-пользовательского-адреса-произвольного-пользователя">Добавление пользовательского адреса произвольного пользователя</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Сущности-и-справочники">Сущности и справочники</a>
+<ul class="sectlevel2">
+<li><a href="#Ресурсы-отделения">Ресурсы отделения</a>
+<ul class="sectlevel3">
+<li><a href="#cоздание-ресурса-отеления">Cоздание ресурса отеления</a></li>
+<li><a href="#Изменение-ресурса-отеления">Изменение ресурса отеления</a></li>
+<li><a href="#Удаление-ресурса-отеления">Удаление ресурса отеления</a></li>
+<li><a href="#Получение-описания-ресурса">Получение описания ресурса</a></li>
+<li><a href="#Получение-списка-ресурсов">Получение списка ресурсов</a></li>
+<li><a href="#Пeреназначение-иерархии-для-ресурса-отделения">Пeреназначение иерархии для ресурса отделения</a></li>
+</ul>
+</li>
+<li><a href="#Словари">Словари</a>
+<ul class="sectlevel3">
+<li><a href="#Сообщения-для-состояний-отправлений">Сообщения для состояний отправлений</a></li>
+<li><a href="#Сообщения-для-действий-по-отправлениям">Сообщения для действий по отправлениям</a></li>
+</ul>
+</li>
+<li><a href="#Множественная-batch-обработка-действий">Множественная (batch) обработка действий</a></li>
+</ul>
+</li>
+<li><a href="#Уведомления">Уведомления</a>
+<ul class="sectlevel2">
+<li><a href="#Отчет-интерфейса-оператора">Отчет интерфейса оператора</a></li>
+<li><a href="#КлиентСистема">Клиент&#8594;Система</a>
+<ul class="sectlevel3">
+<li><a href="#Забор-отправления-в-отделении">Забор отправления в отделении</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Общая-информация">Общая информация</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Доступ к API осуществляется:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>во <a href="../README.adoc#_infrastructure">внутренней сети инфраструктуры</a> по
+протоколу HTTP</p>
+</li>
+<li>
+<p>из всех остальных мест <em>вне</em> локальной инфраструктуры - по протоколу HTTPS</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Внешний доступ к текущему апи&#8201;&#8212;&#8201;<a href="https://api.tbt-post.net" class="bare">https://api.tbt-post.net</a></p>
+</div>
+<div class="paragraph">
+<p>Следующая версия апи&#8201;&#8212;&#8201;<a href="http://api-next.tbt-post.net" class="bare">http://api-next.tbt-post.net</a></p>
+</div>
+<div class="paragraph">
+<p>Версия для разработки&#8201;&#8212;&#8201;<a href="http://sandbox-api.tbt-post.net" class="bare">http://sandbox-api.tbt-post.net</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Если явно не указаного обратного, по-умолчанию формат данных (content-type) подразумевается как <code>application/json</code>, кодировка (encoding/charset) UTF-8, использование BOM (ByteOrderMark для Windows клиентов) - отключено.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Если явно не указано обратного, текстовые поля в структурах данных (как ключи, так и значения)&#8201;&#8212;&#8201;чувствительны к регистру (case sensitive)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Формат URI для доступа к API:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>https://api.tbt-post.net/api/v{v_number}/{method_name}/{method_params}?{get_params}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>где:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+{v_number}
+</td>
+<td class="hdlist2">
+<p>номер версии API в виде числа</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+{method_name}
+</td>
+<td class="hdlist2">
+<p>название метода</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+{method_params}
+</td>
+<td class="hdlist2">
+<p>параметры метода в URI</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+{get_params}
+</td>
+<td class="hdlist2">
+<p>опциональные GET параметры</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Также, в описании API используются:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+{protocol_method}
+</td>
+<td class="hdlist2">
+<p>HTTP метод</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+{request_body}
+</td>
+<td class="hdlist2">
+<p>описание формата тела запроса</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+{expected_result}
+</td>
+<td class="hdlist2">
+<p>описание формата возвращаемого в случае успеха результата в формате <code>&lt;Code&gt; &lt;Response body&gt;</code></p>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="Форматы-протокола">Форматы протокола</h3>
+<div class="paragraph">
+<p>Формат обмена данными:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JSON - комплекскные формы и структуры данных</p>
+</li>
+<li>
+<p>LINK PARAMS - параметризированный URI</p>
+</li>
+<li>
+<p>REQUEST BODY - для передачи бинарных банных</p>
+</li>
+<li>
+<p>REQUEST HEADER - для передачи заголовочной информации</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Формат возвращаемого ответа:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>HTTP Response Code + JSON payload</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Типы-данных">Типы данных</h3>
+<div class="paragraph">
+<p>Для унификации работы с данными в различных использованных наборах
+инструментов приняты такие типы данных и таковая их трактовка:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 1. Типы данных</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">#</th>
+<th class="tableblock halign-left valign-top">Название типа</th>
+<th class="tableblock halign-left valign-top">Описание типа</th>
+<th class="tableblock halign-left valign-top">Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Целое число длиной 4 байта (32 бита)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Целое число длиной 8 байт (64 бита)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456890</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Вещественное число с разделителем "." длиной 8 байт (64 бита)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456890.12 0.12345</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string (text)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Строка в формате unicode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">u&#8217;строка'</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datatime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Дата и время в формате ISO 8601 (UTC+0) YYYY-MM-DDTHH:MM:SSZ</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2016-02-29T06:12:20Z</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Логический тип</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number/BigInteger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Целое число длиной более 8 байт (&gt;64 бит)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">174554483551928087757411873995522791996L</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uuid (UUID)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Universally Unique Identifier&#8201;&#8212;&#8201;16-байтный (128-битный) номер, передается в текстовой форме как hexadecimal representation в виде строки, в бинарной форме&#8201;&#8212;&#8201;как Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">u'8351f87e-7b89-4503-bc9a-76add66f5a3c' 174554483551928087757411873995522791996L</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Для хранения меток времени <code>created_at</code>,<code>modified_at</code> и т.п. используется <a href="https://tools.ietf.org/html/rfc4122#section-4.2.2">uuid версии 1</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="http-Методы">HTTP Методы</h3>
+<div class="paragraph">
+<p>При работе с API используются следующие HTTP методы для выполнения той или иной функции:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 2. Методы протокола</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">#</th>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Выборка данных, немодифицирующие запросы</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Создание данных</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Обновление данных</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Удаление данных</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="http-Статусы">HTTP Статусы</h3>
+<div class="paragraph">
+<p>Возвращаемые методами статусы должны следовать стандартам HTTP протокола в
+соответствии с
+<a href="http://www.ietf.org/assignments/http-status-codes/http-status-codes.xml">IETF RFC7231</a></p>
+</div>
+<div class="paragraph">
+<p>Основные используемые в системе коды приведены ниже:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 3. Статусы протокола</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Значение</th>
+<th class="tableblock halign-left valign-top">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрос выполнен успешно.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">201</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрос был выполнен, и, в результате, создан новый ресурс. Вновь созданный ресурс может быть, на который ссылается URI (ы) возвращается в объекте ответа, с самым конкретным URI для ресурса отдается в поле заголовка Location. Ответ СЛЕДУЕТ включить объект, содержащий список характеристик и местоположения (ы), из которых пользователь или агент пользователя может выбрать наиболее подходящий. Формат объекта определяется тип носителя приведены в Content-Type заголовка поля. Первоначальный сервер ДОЛЖЕН создать ресурс перед возвратом кода состояния 201. Если действие не может быть выполнено немедленно, сервер должен ответить 202 (Принято) вместо ответа.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">202</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрос принят в обработку, но еще не завершен. Нет никаких гарантий, что запрос успешно выполнится в процессе обработки данных. Из-за асинхронного типа выполняемой операции отсутствует возможность повторной отправки статуса.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">204</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No Content</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрос был успешно обработан, но нет необходимости возвращать какие-либо данные. Так же в ответе может возвращаться новая, или обновленная информация, однако в итоге она не будет отличаться о того, что было изначально послано на сервер и, таким образом, считается что клиент и так обладает актуальной информацией.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">301</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Moved Permanently</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрашиваемому ресурсу был установлен новый URI и будущие обращения к этому ресурсу должны осуществляться по возвращенному URI. Клиенты с возможностью редактирования должны автоматически переопределить ссылки на Request-URI для одной или более новых ссылок, возвращенных сервером, где это возможно. Этот ответ является кэшируемы если не указано иное.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">304</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not Modified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Если клиент выполнил условный запрос GET и доступ разрешен, но документ не был изменен, сервер должен ответить, используя этот код состояния.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрос не удалось обработать из-за синтаксической ошибки или ошибки протокола</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрос требует аутентификации пользователя. Ответ должен содердать WWW-Authenticate заголовок (раздел 14.47). Клиент может повторить запрос с корректным Authorization заголовком (раздел 14.8). Если запрос уже содержит информацию для авторизации, в таком случае 401 код ответа показывает, что авторизация была отклонена.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Сервер понял запрос, но отказывается его обрабатывать. Авторизация не поможет и этот запрос НЕ СЛЕДУЕТ повторять.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Сервер не нашел по указанному URI никаких ресурсов. Нет никаких указаний о том, постоянное это состояние или нет. СЛЕДУЕТ использовать статус 410 (Gone), если серверу известно, что старый ресурс недоступен постоянно и у него нет адреса пересылки.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Запрос нельзя обработать из-за конфликта в текущем состоянии ресурса. Этот код разрешается использовать только в тех случаях, когда ожидается, что пользователь может самостоятельно разрешить этот конфликт и повторить запрос.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">410</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Требуемый ресурс больше не доступен на сервере и адрес его расположения не известен. Предполагается, что это состояние постоянно. Клиентам с возможностью редактирования ссылки СЛЕДУЕТ удалить ссылки на запрошенный URL после подтверждения</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">422</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unprocessable Entity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Сервер понимает указанный вид данных, (т.е., статус 415 использовать нельзя), синтаксис запроса корректен (т.е. статус 400 использовать некорректно), однако содержащиеся в запросе инструкции нельзя выполнить ( Например, тело запроса синтаксически правильно, но содержит семантическую ошибку или некорректно обрабатывается нижним уровнем БД)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">429</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Too Many Requests</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Возвращается баллансировщикам (т.е. исключительно внутренним/доверенным сервисам) в случае, когда сервис может самостоятельно оценить превышение нагрузки. В случае с внешними клиентами&#8201;&#8212;&#8201;задача оценки потока и <strong>блокирования</strong> трафика&#8201;&#8212;&#8201;целиком и полностью задача внешнего периметра системы. Т.о. данных статус&#8201;&#8212;&#8201;исключительно вспомогателен и должен использоваться с аккуратностью.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal Server Error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Сервер столкнулся с неожиданными условиями, которые не позволили ему обработать запрос.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">501</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not Implemented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Сервер не поддерживает функциональных возможностей, необходимых для выполнения запроса. Это типичный ответ, когда сервер не понимает метод в запросе и не способен выполнить запрос для ресурса. Если же метод серверу известен, но он не применим к данному ресурсу, то нужно вернуть ответ 405.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="api">API</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Все методы пользовательского api (<code>&lt;api base uri&gt;/api/&#8230;&#8203;</code>) отдекорированы асинхронным методом <code>@authenticated</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Все методы api с префиксом op/ предназначениы для операторского интерфейса, и требуют от пользователя соответствующих прав доступа.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+методы, подразумевающие работу со структураци данных осуществляют базовою валидацию полей на стороне сервера
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+Содержимое полей запроса в <code>&lt;&gt;</code>&#8201;&#8212;&#8201;указание на определенный тип поля
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Для обозначения пустого (осутствующего) содержимого в описании используется <code>----</code>. Использовать его как значение <strong>НЕ РЕКОМЕНДУЕТСЯ</strong>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 4. Типы полей в запросах</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Поле</th>
+<th class="tableblock halign-left valign-top">тип</th>
+<th class="tableblock halign-left valign-top">Описание</th>
+<th class="tableblock halign-left valign-top">Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID пользователя в системе (UUID в текстовом виде)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"3ea7a7b6-5623-48ba-9fb7-1bcfd4c15fa7"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER EMAIL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Почтовый адрес пользователя (используется в качестве login)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"<a href="mailto:testuset@example.com">testuset@example.com</a>"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER PASSWORD, NEW PASSWORD, OLD PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Пароль пользователя в открытом виде</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"123456"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PHONE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Телефон пользователя в формате 380XXYYYYYYY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"380997788999"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FIRST NAME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Имя пользователя</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"Иван"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LAST NAME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Фамилия пользователя</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"Иванов"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GENDER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Пол пользователя (словарный тип: 'undef','male','female')</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"male"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OTC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Одноразовый код (обычно - UUID в текстовом виде)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"046e053c-c35c-408f-a422-9fe20f50c35b"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true/false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean / text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Логический флаг. Может передаваться как boolean или как строковой литерал словарного типа 'true'/'false' (строковая форма&#8201;&#8212;&#8201;предпочтительнее по причине лучшей совместимости с разными типами протоколов и серверного ПО)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true / "true"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER RATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Совокупный показатель рейтинга пользователя в системе</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456789</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BIRTHDAY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Дата рождения пользователя в формате YYYY-MM-DD или null (как тип)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"2000-01-02"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP UTC, TIMESTAMP LOCAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Временная метка в текстовом представлении ISO формата. UTC/LOCAL&#8201;&#8212;&#8201;без/с учетом локальной временной зоны</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"2016-08-12 15:30:21.341210+00:00"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER SOURCE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Источник создания пользователя (собственный или из внешнего API, словарный тип: 'local','kasta'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"kasta"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER ROLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Роль(-и) пользователя в системе (словарный тип: 'guest', 'user', 'agent', 'courier', 'forwarder', 'operator', 'officer', 'manager', 'analyst', 'op_support', 'techician', 'admin')</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"user"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LANG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Источник создания пользователя (собственный или из внешнего API, словарный тип: 'en','ru','uk'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"uk"</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="Регистрация">Регистрация</h3>
+<div class="sect3">
+<h4 id="Создание-пользователя">Создание пользователя</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/reg</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"email":"&lt;USER EMAIL&gt;","password":"&lt;USER PASSWORD&gt;", "phone": "&lt;PHONE 380XXYYYYYYY&gt;", "first_name": "&lt;FIRST NAME&gt;", "last_name": "&lt;LAST NAME&gt;", "gender": "&lt;GENDER&gt;", "prefered_lang" : "&lt;LANG&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+поле <code>prefered_lang</code> является опциональным и, по-умолчанию, заполняется при создании пользователя в значение языка пользовательского интерфейса.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Создание-пользователя-оператором">Создание пользователя оператором</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/reg</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"email":"&lt;USER EMAIL&gt;", "phone": "&lt;PHONE 380XXYYYYYYY&gt;", "first_name": "&lt;FIRST NAME&gt;", "last_name": "&lt;LAST NAME&gt;", "gender": "&lt;GENDER&gt;", "prefered_lang" : "&lt;LANG&gt;", "activate": &lt;true/false&gt;}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "id": &lt;USER ID&gt;}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Если параметр <code>activate</code> false (по-умолчанию), пользователь будет создан с флагом <code>is_poor</code>, если true, то новый пользователь будет активирован.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Потдтверждение-регистрации">Потдтверждение регистрации</h4>
+<div class="sect4">
+<h5 id="Запрос-ОТС">Запрос ОТС</h5>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>otc</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>new</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "REGISTRATION", "email": "&lt;USER EMAIL&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Подтверждение">Подтверждение</h5>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>otc</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>validate</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "REGISTRATION", "otc": "&lt;OTC&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Вход">Вход</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>auth</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>login</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"username":"&lt;USER EMAIL&gt;","password":"&lt;USER PASSWORD&gt;", "remember_me": "&lt;true/false&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Выход">Выход</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>auth</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>logout</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Восстановление-пароля">Восстановление пароля</h3>
+<div class="sect3">
+<h4 id="Запрос-ОТС-2">Запрос ОТС</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>otc</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>new</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "RESTORE_PASSWORD", "email": "&lt;USER EMAIL&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Превалидация-ОТС">Превалидация ОТС</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>otc</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>validate</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "RESTORE_PASSWORD", "otc": "&lt;OTC&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Изменение-пароля">Изменение пароля</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/profile</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>password</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"new_password": "&lt;NEW PASSWORD&gt;", "otc": "&lt;OTC&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Изменение-пароля-2">Изменение пароля</h3>
+<div class="paragraph">
+<p>Подразумевается самостоятельное изменение авторизированным пользователем пароля, вызванное, напрмер, из пользовательского профиля.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+требует авторизации
+</td>
+</tr>
+</table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>PUT</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/profile</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>password</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"new_password": "&lt;NEW PASSWORD&gt;", "old_password": "&lt;OLD PASSWORD&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Пользовательский-профиль">Пользовательский профиль</h3>
+<div class="sect3">
+<h4 id="Получение-собственного-профиля">Получение собственного профиля</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/profile</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "first_name": "&lt;FIRST NAME&gt;", "last_name": "&lt;LAST NAME&gt;", "is_external": &lt;true/false&gt;, "phone": "&lt;PHONE 380XXYYYYYYY&gt;", "gender": "&lt;GENDER&gt;", "created_at": "&lt;TIMESTAMP UTC&gt;", "activated_at": "TIMESTAMP UTC", "modified_at": "TIMESTAMP UTC", "password_changed": "TIMESTAMP UTC", "additional_data": {}, "is_active": &lt;true/false&gt;, "sourced_by": "&lt;USER SOURCE&gt;", "rate": &lt;USER RATE&gt;, "birthday": &lt;BIRTHDAY&gt;, "id": "&lt;USER ID&gt;", "is_poor": &lt;true/false&gt;, "is_disabled": &lt;true/false&gt;, "email": "&lt;USER EMAIL&gt;", &#8230;&#8203;}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Обновление-собственного-профиля">Обновление собственного профиля</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+неактуальные для контекста поля&#8201;&#8212;&#8201;игнорируются. Передавать можно только часть параметров из набора.
+</td>
+</tr>
+</table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>PUT</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/profile</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"first_name": "&lt;FIRST NAME&gt;", "last_name": "&lt;LAST NAME&gt;", "gender": "&lt;GENDER&gt;", "birthday": "&lt;YYYY-MM-DD&gt;", "prefered_lang": "&lt;LANG&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-базовых-данных-пользователя">Получение базовых данных пользователя</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/resolve</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;USER ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "id": "&lt;USER_ID&gt;," "first_name": "&lt;FIRST NAME&gt;", "last_name": "&lt;LAST NAME&gt;", "phone": "&lt;PHONE 380XXYYYYYYY&gt;"}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Часть цифр номера телефона пользователя скрывается для обеспечения анонимности
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-базовых-данных-списка-пользователей">Получение базовых данных списка пользователей</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/resolve/list</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>id[]=&lt;USER ID&gt;&amp;id[]=&lt;USER ID&gt;&amp;&#8230;&#8203;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "users": [&lt;USER RESOLVE&gt;, &lt;USER RESOLVE&gt;, &#8230;&#8203;]}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Значение &lt;USER RESOLVE&gt; является таким же, как и выходные данные метода <code>user/resolve/&lt;USER ID&gt;</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-профиля-пользователя">Получение профиля пользователя</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/profile</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;USER ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>&lt;phone&gt;/&lt;email&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "first_name": "&lt;FIRST NAME&gt;", "last_name": "&lt;LAST NAME&gt;", "is_external": &lt;true/false&gt;, "phone": "&lt;PHONE 380XXYYYYYYY&gt;", "gender": "&lt;GENDER&gt;", "created_at": "&lt;TIMESTAMP UTC&gt;", "activated_at": "TIMESTAMP UTC", "modified_at": "TIMESTAMP UTC", "password_changed": "TIMESTAMP UTC", "additional_data": {}, "is_active": &lt;true/false&gt;, "sourced_by": "&lt;USER SOURCE&gt;", "rate": &lt;USER RATE&gt;, "birthday": &lt;BIRTHDAY&gt;, "id": "&lt;USER ID&gt;", "is_poor": &lt;true/false&gt;, "is_disabled": &lt;true/false&gt;, "email": "&lt;USER EMAIL&gt;", "roles": [&lt;ROLES LIST&gt;], &#8230;&#8203;}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<code>user_id</code> имеет более высокий приоритет
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Обновление-профиля-пользователя">Обновление профиля пользователя</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+неактуальные для контекста поля&#8201;&#8212;&#8201;игнорируются. Передавать можно только часть параметров из набора.
+</td>
+</tr>
+</table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>PUT</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/profile</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;USER ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"first_name": "&lt;FIRST NAME&gt;", "last_name": "&lt;LAST NAME&gt;", "gender": "&lt;GENDER&gt;", "birthday": "&lt;YYYY-MM-DD&gt;", "prefered_lang": "&lt;LANG&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Подтверждение-профиля-пользователя-оператором">Подтверждение профиля пользователя оператором</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/profile</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>confirm</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"user_id": "&lt;USER ID&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-списка-пользователей-по-id">Получение списка пользователей по id</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/list</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>id[]=&lt;USER ID&gt;&amp;id[]=&lt;USER ID&gt;&amp;&#8230;&#8203;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "users": [&lt;USER PROFILE&gt;, &lt;USER PROFILE&gt;, &#8230;&#8203;]}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Значение &lt;USER PROFILE&gt; является таким же, как и выходные данные метода <code>op/user/profile/&lt;USER ID&gt;</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Поиск-пользователей">Поиск пользователей</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/search</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>&lt;user_model_field&gt;,sort_by,sort_order,limit,offset</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "users": [&lt;USER PROFILE&gt;, &lt;USER PROFILE&gt;, &#8230;&#8203;], "total": &lt;search_result_length&gt;}</p>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 5. Типы параметров поиска:</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">параметр</th>
+<th class="tableblock halign-left valign-top">тип</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;num&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">offset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;offset&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort_by</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;user_model_field&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort_order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">asc/desc</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;user_model_field&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">['first_name', 'last_name', 'gender', 'birthday', 'sourced_by', 'block_status', 'parent', 'confirmed_by', 'is_poor', 'is_active', 'is_external', 'is_phone_valid', 'is_confirmed']</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Вход-по-номеру-телефона">Вход по номеру телефона</h3>
+<div class="sect3">
+<h4 id="Запрос-кода">Запрос кода</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+приватная часть кода <code>&lt;SMS CODE&gt;</code> будет выслана на указанный в запросе номер в случае его актуальности и валидности
+</td>
+</tr>
+</table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>otc</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>new</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "PHONE_AUTH", "phone": "&lt;PHONE 380XXYYYYYYY&gt;" }</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"otc": "&lt;OTC&gt;", "success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Авторизация">Авторизация</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>auth</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>phone-login</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc": "&lt;OTC&gt;", "phone_code": "&lt;SMS CODE&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Изменение-телефона">Изменение телефона</h3>
+<div class="sect3">
+<h4 id="Запрос-ОТС-3">Запрос ОТС</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>otc</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>new</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "PHONE_CHANGE", "phone": "&lt;PHONE 380XXYYYYYYY&gt;" }</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"otc": "&lt;OTC&gt;", "success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Подтверждение-2">Подтверждение</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>auth</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>validate</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "PHONE_CHANGE", "otc": "&lt;OTC&gt;", "phone_code": "&lt;SMS CODE&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Изменение-email">Изменение email</h3>
+<div class="sect3">
+<h4 id="Запрос-ОТС-4">Запрос ОТС</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>otc</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>new</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "EMAIL_CHANGE", "email": "&lt;USER EMAIL&gt;" }</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Подтверждение-3">Подтверждение</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>auth</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>validate</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"otc_type": "EMAIL_CHANGE", "otc": "&lt;OTC&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="acl">ACL</h3>
+<div class="sect3">
+<h4 id="Роли-пользоватлея">Роли пользоватлея</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>roles</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "roles": ["&lt;USER ROLE&gt;", &#8230;&#8203;]}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Посылки">Посылки</h3>
+<div class="sect3">
+<h4 id="Получение-по-idcode">Получение по id/code</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>[op/] parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;PARCEL ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>&lt;code&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "address_id": "&lt;SHIPPING ADDRESS ID&gt;", "code": "&lt;CODE-128&gt;", "is_paid": &lt;true/false&gt;, "weight": &lt;WEIGHT GRAM as DECIMAL(10,6)&gt;, "agent": "&lt;USER ID&gt;", "is_open": &lt;true/false&gt;, "paid_at": "&lt;TIMESTAMP UTC&gt; or null", "closed_at": "&lt;TIMESTAMP UTC or null&gt;", "id": "&lt;PARCEL ID&gt;", "paid_amount": &lt;PAYMENTS TOTAL as DECIMAL(10,2)&gt;, "type": &lt;TYPE CODE&gt;, "parent": &lt;PARCEL ID or null&gt;, "price": &lt;PRICE as DECIMAL(10,2)&gt;, "cod_amount": &lt;PRICE as DECIMAL(10,2)&gt; "class": "&lt;CLASS ID&gt;", "sender": "&lt;USER ID&gt;", "created_at": "&lt;TIMESTAMP UTC&gt;", "modified_at": "&lt;TIMESTAMP UTC&gt;", "receiver": "&lt;USER ID&gt;", "state": "&lt;PARCEL STATE&gt;", "transfer_via": "&lt;OFFCIE ID&gt;", "pentity": "&lt;OFFICE ENTITY ID&gt;", "delivery_type": "&lt;DELIVERY TYPE&gt;", "additional_data": {&#8230;&#8203;}, &#8230;&#8203;}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<code>parcel_id</code> имеет более высокий приоритет, чем <code>code</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-графических-кодов">Получение графических кодов</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>[op/] parcel/codes</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;PARCEL ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "qr": &lt;IMAGE DATA URI&gt;", "bcode": "&lt;IMAGE DATA URI&gt;"}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+DATA URI is according to <code>RFC-2397</code>: data:[&lt;media type&gt;][;base64],&lt;data&gt;
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Поиск">Поиск</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/parcel/search</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>&lt;&lt;parcel_model_field&gt;office_id/pentity/receiver_phone/sender_phone/participant_phone/sender_email/pattern_id/pattern_code/state[]/interval_from/interval_to&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "parcels": [
+        {
+            "additional_data": {&#8230;&#8203;},
+            "address_id": "&lt;SHIPPING ADDRESS ID&gt;",
+            "agent": "&lt;USER ID&gt;",
+            "class": "&lt;CLASS ID&gt;",
+            "closed_at": "&lt;TIMESTAMP UTC&gt;",
+            "code": "&lt;CODE-128&gt;",
+            "created_at": "&lt;TIMESTAMP UTC&gt;",
+            "id": "&lt;PARCEL ID&gt;",
+            "is_open": &lt;true/false&gt;,
+            "is_paid": &lt;true/false&gt;,
+            "modified_at": "&lt;TIMESTAMP UTC&gt;",
+            "cod_amount": &lt;PAYMENTS TOTAL as DECIMAL(10,2)&gt;,
+            "paid_amount": &lt;PAYMENTS TOTAL as DECIMAL(10,2)&gt;,
+            "paid_at": "&lt;TIMESTAMP UTC&gt;",
+            "parent": &lt;PARCEL ID or null&gt;,
+            "price": &lt;PRICE as DECIMAL(10,2)&gt;,
+            "receiver": "&lt;USER ID&gt;",
+            "sender": "&lt;USER ID&gt;",
+            "type": &lt;TYPE CODE&gt;,
+            "weight": &lt;WEIGHT GRAM as DECIMAL(10,6)&gt;,
+            "state": "&lt;PARCEL STATE&gt;",
+            "transfer_via": "&lt;OFFCIE ID&gt;",
+            "pentity": "&lt;OFFICE ENTITY ID&gt;",
+            "delivery_type": "&lt;DELIVERY TYPE&gt;",
+           &#8230;&#8203;
+        }
+    ],
+    "total": &lt;search_result_length&gt;,
+    "success": true
+}</p>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 6. Типы параметров поиска:</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">параметр</th>
+<th class="tableblock halign-left valign-top">тип</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;num&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">offset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;offset&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort_by</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;parcel_model_field&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort_order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">asc/desc</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;parcel_model_field&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">['sender', 'receiver', 'agent', 'parent', 'address_id', 'transfer_via', 'type', 'class', 'state', 'is_open', 'is_paid', 'goes_back']</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">office_id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;uuid&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pentity - рекурсивный поиск по ресурсу отделения</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;uuid&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">state[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;parcel state list&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">receiver_phone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;phone&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sender_phone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;phone&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">participant_phone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;phone&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sender_email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;email&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pattern_id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;like pattern&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pattern_code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;like pattern&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">interval_from</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;date-time&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">interval_to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;date-time&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">interval_field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">created_at/modified_at/checked_in_at (default created_at)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pentity_recur</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true/false  - поиск рекурсивно по полю pentity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="Получение-посылок-по-списку-id">Получение посылок по списку id</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/parcel/list</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>id[]=&lt;PARCEL ID&gt;&amp;id[]=&lt;PARCEL ID&gt;&amp;&#8230;&#8203;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "parcels": [
+        {
+            "additional_data": {&#8230;&#8203;},
+            "address_id": "&lt;SHIPPING ADDRESS ID&gt;",
+            "agent": "&lt;USER ID&gt;",
+            "class": "&lt;CLASS ID&gt;",
+            "closed_at": "&lt;TIMESTAMP UTC&gt;",
+            "code": "&lt;CODE-128&gt;",
+            "created_at": "&lt;TIMESTAMP UTC&gt;",
+            "id": "&lt;PARCEL ID&gt;",
+            "is_open": &lt;true/false&gt;,
+            "is_paid": &lt;true/false&gt;,
+            "modified_at": "&lt;TIMESTAMP UTC&gt;",
+            "cod_amount": &lt;PAYMENTS TOTAL as DECIMAL(10,2)&gt;,
+            "paid_amount": &lt;PAYMENTS TOTAL as DECIMAL(10,2)&gt;,
+            "paid_at": "&lt;TIMESTAMP UTC&gt;",
+            "parent": &lt;PARCEL ID or null&gt;,
+            "price": &lt;PRICE as DECIMAL(10,2)&gt;,
+            "receiver": "&lt;USER ID&gt;",
+            "sender": "&lt;USER ID&gt;",
+            "type": &lt;TYPE CODE&gt;,
+            "weight": &lt;WEIGHT GRAM as DECIMAL(10,6)&gt;,
+            "state": "&lt;PARCEL STATE&gt;",
+            "transfer_via": "&lt;OFFCIE ID&gt;",
+            "pentity": "&lt;OFFICE ENTITY ID&gt;",
+            "delivery_type": "&lt;DELIVERY TYPE&gt;",
+           &#8230;&#8203;
+        }
+    ],
+    "success": true
+}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="cписок-посылок-пользователя">Cписок посылок пользователя</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>parcel/list</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>participant</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "parcels": [
+        {
+            "additional_data": {&#8230;&#8203;},
+            "address_id": "&lt;SHIPPING ADDRESS ID&gt;",
+            "agent": "&lt;USER ID&gt;",
+            "class": "&lt;CLASS ID&gt;",
+            "closed_at": "&lt;TIMESTAMP UTC&gt;",
+            "code": "&lt;CODE-128&gt;",
+            "created_at": "&lt;TIMESTAMP UTC&gt;",
+            "id": "&lt;PARCEL ID&gt;",
+            "is_open": &lt;true/false&gt;,
+            "is_paid": &lt;true/false&gt;,
+            "modified_at": "&lt;TIMESTAMP UTC&gt;",
+            "cod_amount": &lt;PAYMENTS TOTAL as DECIMAL(10,2)&gt;,
+            "paid_amount": &lt;PAYMENTS TOTAL as DECIMAL(10,2)&gt;,
+            "paid_at": "&lt;TIMESTAMP UTC&gt;",
+            "parent": &lt;PARCEL ID or null&gt;,
+            "price": &lt;PRICE as DECIMAL(10,2)&gt;,
+            "receiver": "&lt;USER ID&gt;",
+            "sender": "&lt;USER ID&gt;",
+            "type": &lt;TYPE CODE&gt;,
+            "weight": &lt;WEIGHT GRAM as DECIMAL(10,6)&gt;,
+            "state": "&lt;PARCEL STATE&gt;",
+            "transfer_via": "&lt;OFFCIE ID&gt;",
+            "pentity": "&lt;OFFICE ENTITY ID&gt;",
+            "delivery_type": "&lt;DELIVERY TYPE&gt;",
+           &#8230;&#8203;
+        }
+    ],
+    "total": &lt;search_result_length&gt;,
+    "success": true
+}</p>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 7. Типы параметров поиска:</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">параметр</th>
+<th class="tableblock halign-left valign-top">тип</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">participant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">all/sender/receiver</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;num&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">offset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;offset&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort_by</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">['weight', 'price', 'paid_amount', 'created_at', 'modified_at', 'paid_at', 'type', 'class', 'state', 'goes_back']</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort_order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">asc/desc</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="Создание-посылки">Создание посылки</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"type": &lt;TYPE CODE&gt;, "class": "&lt;CLASS ID&gt;", "sender": "&lt;USER ID&gt;", "receiver":"&lt;USER ID&gt;", "address_id": "&lt;SHIPPING ADDRESS ID&gt;", "weight": &lt;WEIGHT GRAM as INTEGER)&gt;, "price": &lt;PRICE as DECIMAL(10,2)&gt;, "cod_amount": &lt;PRICE as DECIMAL(10,2)&gt;}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "id": "&lt;PARCEL ID&gt;"}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Изменение-посылки">Изменение посылки</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>PUT</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;PARCEL ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"state": "&lt;STATE ID&gt;", "type": &lt;TYPE CODE&gt;, "class": "&lt;CLASS ID&gt;", "sender": "&lt;USER ID&gt;", "receiver":"&lt;USER ID&gt;", "address_id": "&lt;SHIPPING ADDRESS ID&gt;", "transfer_via": "&lt;SHIPPING ADDRESS ID&gt;", "weight": &lt;WEIGHT GRAM as INTEGER&gt;, "price": &lt;PRICE as DECIMAL(10,2)&gt;, "paid_amount": &lt;PRICE as DECIMAL(10,2)&gt;, "cod_amount": &lt;PRICE as DECIMAL(10,2)&gt;}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+необходимо передавать подмножество описанных параметров для изменения посылки.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Статистика-по-посылкам-для-отделения">Статистика по посылкам для отделения</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>office-stat</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "success": true,
+    "rules": {"&lt;RULE ID&gt;": ["&lt;PARCEL STATE&gt;", "&lt;PARCEL STATE&gt;",&lt;&#8230;&#8203;&gt;], "&lt;RULE ID&gt;": [&#8230;&#8203;], &#8230;&#8203;},
+    "total": &lt;PARCEL COUNT as INTEGER&gt;,
+    "stats": {"&lt;RULE ID&gt;": &lt;PARCEL COUNT BY RULE as INTEGER&gt;, "&lt;RULE ID&gt;": &lt;&#8230;&#8203;&gt;, &#8230;&#8203;},
+    "filters": {"&lt;FILTER ID&gt;": &lt;PARCEL COUNT BY FILTER as INTEGER&gt;, "&lt;FILTER ID&gt;": &lt;&#8230;&#8203;&gt;, &#8230;&#8203;}
+}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+значения rules: <code>['delivered', 'on_stock', 'in', 'release', 'new', 'in_progress', 'trans', 'out']</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+значения filters: <code>['returns', 'cancellations']</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Сгруппированный-список-посылок-для-отделения">Сгруппированный список посылок для отделения</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>grouped-list</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>office_id</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "success": true,
+    "grouped": { "&lt;GROUP&gt;": ["&lt;PARCEL&gt;", "&lt;PARCEL&gt;", &#8230;&#8203;], &#8230;&#8203;}
+}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Статистика-по-посылкам-для-пользователя">Статистика по посылкам для пользователя</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>stat</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "receiver": &lt;PARCEL COUNT as INTEGER&gt;, "sender": &lt;PARCEL COUNT as INTEGER&gt;, "on_release": &lt;PARCEL COUNT as INTEGER&gt;}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+значения <code>on_relese</code> - это подмножество посылок из <code>receiver</code>, готовых к выдачи пользователю.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Трекинговая-информация-о-пользовательских-посылках">Трекинговая информация о пользовательских посылках</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>track</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "success": true,
+    "sender": [{"id": "&lt;PARCEL ID&gt;", "state": "&lt;PARCEL STATE&gt;", "goes_back": &lt;true/false&gt;, "sender": "&lt;USER ID&gt;", "receiver": "&lt;USER ID&gt;", "lat": &lt;LATITUDE&gt;, "lon": &lt;LONGITUDE&gt;}, {&#8230;&#8203;}, &#8230;&#8203;],
+    "receiver": [{"id": "&lt;PARCEL ID&gt;", "state": "&lt;PARCEL STATE&gt;", "goes_back": &lt;true/false&gt;, "sender": "&lt;USER ID&gt;", "receiver": "&lt;USER ID&gt;", "lat": &lt;LATITUDE&gt;, "lon": &lt;LONGITUDE&gt;}, {&#8230;&#8203;}, &#8230;&#8203;]
+}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Адреса-и-отделения">Адреса и отделения</h3>
+<div class="paragraph">
+<p>Справочники адресов для разных языков могут отличаться. Для получения информации на конкретном языке в строке запроса можно специфировать язык при помощи параметра <code>lang=&lt;LANG&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Если язык не указан, то будет выбран либо язык пользовательского предпочтения в интерфейсе, либо язык, установленный в пользовательском профиле.</p>
+</div>
+<div class="sect3">
+<h4 id="Получения-данных-отделений">Получения данных отделений</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>offices</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>&lt;lang, all=true|false&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200
+{
+    "offices": [
+    {
+        "id": "&lt;OFFICE ID&gt;",
+        "name": "&lt;OFFICE NAME&gt;",
+        "descr": "&lt;OFFICE LONG NAME&gt;",
+        "number": &lt;OFFICE NUMBER&gt;,
+        "phone": "&lt;OFFICE PHONE&gt;",
+        "email": "&lt;OFFICE EMAIL&gt;",
+        "address": { &lt;ADDRESS SPEC&gt; },
+        "address_data": {
+            "index": "&lt;POST CODE&gt;",
+            "floor": &lt;NUM&gt;,
+            &#8230;&#8203;
+            &lt;OPTIONAL OTHER DATA&gt;
+        },
+        "schedule": {
+            "1": "&lt;OPEN_TIME-CLOSE_TIME | STATUS&gt;",
+            "2": "&lt;OPEN_TIME-CLOSE_TIME | STATUS&gt;",
+            &#8230;&#8203;
+            "7": "&lt;OPEN_TIME-CLOSE_TIME | STATUS&gt;",
+        },
+        "optimal_hours": {&lt;OPTIMAL WORKING HOURS&gt;},
+        "photos": ["&lt;PHOTO URL&gt;", &#8230;&#8203;],
+        "way_photos": ["&lt;PHOTO URL&gt;", &#8230;&#8203;],
+        "pay_cash": true|false,
+        "pay_card": true|false,
+        "additional_data": {
+            "sms_addr": "&lt;SMS ADDRESS&gt;",
+            "code_prefix": "&lt;OFFICE CODE PREFIX&gt;",
+            "label": "&lt;OFFICE LABEL&gt;"
+        },
+        "ui_address": "&lt;ADDRESS LINE&gt;"
+    },
+    &#8230;&#8203;..
+    ],
+    "success": true
+}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+в случае указания параметра <code>all=true</code> в списке будут отображаться так-же внутренние отделения системы.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Список-адресов-отделений">Список адресов отделений</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>list</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>addr_type=&lt;cc_office|fc_office&gt; / id[]=&lt;ADDRESS ID&gt;&amp;id[]=&lt;ADDRESS ID&gt;&amp;&#8230;&#8203;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"address_list": [&lt;ADDRESS1&gt;, &lt;ADDRESS2&gt;, &#8230;&#8203;], "success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>где:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+cc_office
+</td>
+<td class="hdlist2">
+<p>собственные отделения</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+fc_office
+</td>
+<td class="hdlist2">
+<p>агентские отделения</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-адреса-из-справочника">Получение адреса из справочника</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;SHIPPING ADDRESS ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>&lt;lang &lt;lat,lon&gt; | &lt;region,city,street,building&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "lang": "&lt;LANG&gt;", "city": "&lt;CITY&gt;", "building": "&lt;BUILDING&gt;", "area": "&lt;ADDRESS AREA or null&gt;", "country": "&lt;COUNTRY CODE&gt;", "region": "&lt;CITY REGION or null&gt;", "lon": &lt;LONGITUDE&gt;, "lat": &lt;LONGITUDE&gt;, "id": "&lt;SHIPPING ADDRESS ID&gt;", "note": "&lt;TEXT or null&gt;", "modified_at": "&lt;TIMESTAMP UTC&gt;", "street": "&lt;STREET&gt;", "addr_type": "&lt;TYPE ID&gt;", "accuracy": "&lt;ADDRESS ACCURACY&gt;", "geo_source": "&lt;google|yandex|osm&gt;", "geo_object": {&lt;ADDITIONAL GEO DATA&gt;}}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+в качестве get-параметров указывается <em>либо</em> пара гео-координат, <em>либо</em> составные параметры адреса, <em>либо</em> <code>id</code> адреса.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<code>id</code> в качестве параметра метода имеет боле высокий приоритет
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-списка-фильтров-агрегации-адресов">Получение списка фильтров (агрегации) адресов</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>filters</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>field=&lt;region|city|street|building&gt;,[region=&lt;AGG REGION&gt;,city=&lt;AGG CITY&gt;,street=&lt;AGG STREET&gt;, pattern=&lt;FILTER PATTERN&gt;, lang]</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "filters": [&lt;field_value_1&gt;, .. &lt;field_value_N&gt;]}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Для получения списка фильтиров (агрегации) для поля адреса более нижнего уровня, необходимо задать через get-параметры значения полей более высокого уровня в соответствии с древовидной структурой адреса: region &#8594; city &#8594; street &#8594; building.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Дополнительный параметр <code>pattern</code> используется для дополнительной фильтрации результирующего списка фильтров.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Создание-адреса-в-справочнике">Создание адреса в справочнике</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Кодирование и декодирование проиходят <em>с нормализацией гео-позиции</em> (т.е. результат соответствует геометрическому центру результирующего объекта)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Для создания адреса, как правило, достаточно указания в теле запроса:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>city</code>&#8201;&#8212;&#8201;город/населенный пункт</p>
+</li>
+<li>
+<p><code>street</code>&#8201;&#8212;&#8201;улица</p>
+</li>
+<li>
+<p><code>building</code>&#8201;&#8212;&#8201;дом</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>однако, ввиду того, что одно и то же название населенного пункта может присутствовать несколько раз в различных местностях, а улицы&#8201;&#8212;&#8201;в разных районах одного города, возможно (а в ряде случаев и рекомендовано) использовать дополнительные опциональные параметры:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>region</code>&#8201;&#8212;&#8201;область/регион</p>
+</li>
+<li>
+<p><code>area</code>&#8201;&#8212;&#8201;район/местность</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Указание в теле запроса ключа <code>lang</code> приводит к переключению распознавания ввода и изменению языка вывода результата.</p>
+</div>
+<div class="paragraph">
+<p>Резолвинг происходит автоматически, т.е. фактическая процедура происходит по принципу <strong>resolve and set</strong>.</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"city": "&lt;CITY&gt;", "street": "&lt;STREET&gt;", "building": "&lt;BUILDING&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "building": "&lt;BUILDING&gt;", "street": "&lt;STREET&gt;", "lat": &lt;LATITUDE&gt;, "id": "&lt;SHIPPING ADDRESS ID&gt;", "lang": "&lt;LANG&gt;", "city": "&lt;CITY&gt;", "area": &lt;ADDRESS AREA or null&gt;, "country": "&lt;COUNTRY CIDE&gt;", "region": "&lt;CITY REGION or null&gt;", "lon": &lt;LONGITUDE&gt;, "accuracy": "&lt;ADDRESS ACCURACY&gt;", "geo_source": "&lt;google|yandex|osm&gt;", "geo_object": {&lt;ADDITIONAL GEO DATA&gt;}}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Для обратного кодирования в теле запроса необходимо указывать координаты.</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"lat": &lt;LATITUDE&gt;, "lon": &lt;LONGITUDE&gt;}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "building": "&lt;BUILDING&gt;", "street": "&lt;STREET&gt;", "lat": &lt;LATITUDE&gt;, "id": "&lt;SHIPPING ADDRESS ID&gt;", "lang": "&lt;LANG&gt;", "city": "&lt;CITY&gt;", "area": &lt;ADDRESS AREA or null&gt;, "country": "&lt;COUNTRY CIDE&gt;", "region": "&lt;CITY REGION or null&gt;", "lon": &lt;LONGITUDE&gt;, "accuracy": "&lt;ADDRESS ACCURACY&gt;", "geo_source": "&lt;google|yandex|osm&gt;", "geo_object": {&lt;ADDITIONAL GEO DATA&gt;}}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Список-пользовательских-адресов">Список пользовательских адресов</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "address_list": [{"building": "&lt;BUILDING&gt;", "city": "&lt;CITY&gt;", "address_id": "&lt;SHIPPING ADDRESS ID&gt;", "service": "&lt;ADDRESS SERVICE&gt;", "apartment": "&lt;APARTMENT&gt;", "lang": "&lt;LANG&gt;", "title": "&lt;ADDRESS TITLE&gt;", "country": "&lt;COUNTRY CODE&gt;", "notes": "&lt;TEXT or null&gt;", "area": &lt;ADDRESS AREA or null&gt;, "lon": &lt;LONGITUDE&gt;, "is_default": &lt;true/false&gt;, "street": "&lt;STREET&gt;", "lat": &lt;LATITUDE&gt;, "region": "&lt;CITY REGION or null&gt;"}]}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+расширение параметризации метода идентификатором адреса (т.е.&lt;SHIPPING ADDRES ID&gt;) возвращает описание отдельного адреса (редуцирует выборку)
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Добавление-пользовательского-адреса">Добавление пользовательского адреса</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>user/address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"address_id" : "&lt;SHIPPING ADDRESS ID&gt;", "service": "&lt;ADDRESS SERVICE&gt;", "title": "ADDRESS TITLE", "apartment": "&lt;APARTMENT&gt;", "notes": "TEXT"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Список-пользовательских-адресов-произвольного-пользователя">Список пользовательских адресов произвольного пользователя</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;USER ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "address_list": [{"building": "&lt;BUILDING&gt;", "city": "&lt;CITY&gt;", "address_id": "&lt;SHIPPING ADDRESS ID&gt;", "apartment": "&lt;APARTMENT&gt;", "lang": "&lt;LANG&gt;", "title": "&lt;ADDRESS TITLE&gt;", "country": "&lt;COUNTRY CODE&gt;", "notes": "&lt;TEXT or null&gt;", "area": &lt;ADDRESS AREA or null&gt;, "lon": &lt;LONGITUDE&gt;, "is_default": &lt;true/false&gt;, "street": "&lt;STREET&gt;", "lat": &lt;LATITUDE&gt;, "region": "&lt;CITY REGION or null&gt;"}]}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+расширение параметризации метода идентификатором адреса (т.е. &lt;USER ID&gt;/&lt;SHIPPING ADDRES ID&gt;) возвращает описание отдельного адреса (редуцирует выборку)
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Добавление-пользовательского-адреса-произвольного-пользователя">Добавление пользовательского адреса произвольного пользователя</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/user/address</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;USER ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"address_id" : "&lt;SHIPPING ADDRESS ID&gt;", "service": "&lt;ADDRESS SERVICE&gt;", "title": "ADDRESS TITLE", "apartment": "&lt;APARTMENT&gt;", "notes": "TEXT"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Сущности-и-справочники">Сущности и справочники</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Ресурсы-отделения">Ресурсы отделения</h3>
+<div class="sect3">
+<h4 id="cоздание-ресурса-отеления">Cоздание ресурса отеления</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/entity</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"type": "&lt;ENTITY TYPE&gt;", "parent": "&lt;ENTITY ID&gt;", "descr": "&lt;ENTITY DESCRIPTION&gt;", "label": "&lt;ENTITY LABEL&gt;", "path": "&lt;PATH (1C FORMAT)&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "id": "&lt;ENTITY ID&gt;", "type": "&lt;ENTITY TYPE&gt;", "owner": "&lt;OFFICE USER ID&gt;", "parent": "&lt;ENTITY ID&gt;", "descr": "&lt;ENTITY DESCRIPTION&gt;" "properties": {"label": "&lt;ENTITY LABEL&gt;", "path": "&lt;PATH (1C FORMAT)&gt;", "db_path": ["&lt;PARENT ENTITY ID&gt;", "&lt;PARENT ENTITY ID&gt;", &#8230;&#8203;]}]}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Изменение-ресурса-отеления">Изменение ресурса отеления</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>PUT</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/entity</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;ENTITY ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"descr": "&lt;ENTITY DESCRIPTION&gt;", "label": "&lt;ENTITY LABEL&gt;", "path": "&lt;PATH (1C FORMAT)&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "id": "&lt;ENTITY ID&gt;", "type": "&lt;ENTITY TYPE&gt;", "owner": "&lt;OFFICE USER ID&gt;", "parent": "&lt;ENTITY ID&gt;", "descr": "&lt;ENTITY DESCRIPTION&gt;" "properties": {"label": "&lt;ENTITY LABEL&gt;", "path": "&lt;PATH (1C FORMAT)&gt;", "db_path": ["&lt;PARENT ENTITY ID&gt;", "&lt;PARENT ENTITY ID&gt;", &#8230;&#8203;]}]}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+требуется указать только необходимые параметры для модификации ресурса.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Удаление-ресурса-отеления">Удаление ресурса отеления</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>DELETE</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/entity</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;ENTITY ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+удаление возможно только ресурса, который не имеет подчиненных ресурсов
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-описания-ресурса">Получение описания ресурса</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/entity</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;ENTITY ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>code=&lt;ENTITY BARCODE&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "id": "&lt;ENTITY ID&gt;", "type": "&lt;ENTITY TYPE&gt;", "owner": "&lt;OFFICE USER ID&gt;", "parent": "&lt;ENTITY ID&gt;", "descr": "&lt;ENTITY DESCRIPTION&gt;" "properties": {"code": "&lt;ENTITY BARCODE&gt;", "bcode": "&lt;DATA URI: ENTITY BARCODE&gt;", "label": "&lt;ENTITY LABEL&gt;", "path": "&lt;PATH (1C FORMAT)&gt;", "db_path": ["&lt;PARENT ENTITY ID&gt;", "&lt;PARENT ENTITY ID&gt;", &#8230;&#8203;]}]}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+получение сущности выполняется или по <code>&lt;ENTITY ID&gt;</code> в method_params или по &lt;ENTITY BARCODE&gt; в get_params
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Получение-списка-ресурсов">Получение списка ресурсов</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/entity</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>list</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>[office_id=&lt;OFFICE USER ID&gt;] / parent=&lt;ENTITY ID&gt; / type=&lt;ENTITY TYPE&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "entities": [&lt;ENTITY RECORD&gt;, &lt;ENTITY RECORD&gt;, &#8230;&#8203;]</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+по-умолчанию office_id берется из данных операторского аккаунта, <code>&lt;ENTITY RECORD&gt;</code> соответсвует описанию результата для получения одиночной сущности за исключением поля <code>"properties"/"barcode"</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Пeреназначение-иерархии-для-ресурса-отделения">Пeреназначение иерархии для ресурса отделения</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/entity/reparent</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;ENTITY ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"parent": "&lt;ENTITY ID&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Словари">Словари</h3>
+<div class="sect3">
+<h4 id="Сообщения-для-состояний-отправлений">Сообщения для состояний отправлений</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>dict/parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>states</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>lang=&lt;ru|uk|en&gt; default: ru</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "success": true,
+    "states": {"&lt;STATE ID&gt;": "&lt;STATE MESSAGE&gt;", "&lt;STATE ID&gt;": "&lt;STATE MESSAGE&gt;", &#8230;&#8203;}
+}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Сообщения-для-действий-по-отправлениям">Сообщения для действий по отправлениям</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>GET</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>dict/parcel</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>actions</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+get_params
+</td>
+<td class="hdlist2">
+<p>lang=&lt;ru|uk|en&gt; default: ru</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {
+    "success": true,
+    "actions": {"&lt;STATE ID&gt;": "&lt;STATE ACTION MESSAGE&gt;", "&lt;STATE ID&gt;": "&lt;STATE ACTION MESSAGE&gt;", &#8230;&#8203;}
+}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Множественная-batch-обработка-действий">Множественная (batch) обработка действий</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/batch</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"action": "&lt;parcel_update|entity_reparent|&#8230;&#8203;&gt;", "batches": {"&lt;BATCH_KEY&gt;": {"&lt;PARAM&gt;": "&lt;VALUE&gt;", "&lt;PARAM2&gt;": "&lt;VALUE&gt;", &#8230;&#8203;}, &lt;"BATCH_KEY"&gt;: {&#8230;&#8203;}, &#8230;&#8203;}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>200 {"success": true, "&lt;BATCH_KEY&gt;": {"status": &lt;STATUS_CODE&gt;, "&lt;RESULT_KEY&gt;": &lt;VALUE&gt;, &#8230;&#8203;}, "&lt;BATCH_KEY&gt;": {&#8230;&#8203;}, &#8230;&#8203;}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Для action = <code>parcel_update</code> &lt;BATCH_KEY&gt; является <code>parcel_id</code>, для action = <code>entity_reparent</code> &lt;BATCH_KEY&gt; является <code>entity_id</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Уведомления">Уведомления</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Отчет-интерфейса-оператора">Отчет интерфейса оператора</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>op/report</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>----</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>&lt;ANY REPORT DATA&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>202 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Ограничение объема передаваемых в запросе данных&#8201;&#8212;&#8201;2М
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="КлиентСистема">Клиент&#8594;Система</h3>
+<div class="sect3">
+<h4 id="Забор-отправления-в-отделении">Забор отправления в отделении</h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+protocol_method
+</td>
+<td class="hdlist2">
+<p>POST</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_name
+</td>
+<td class="hdlist2">
+<p>ev/parcel/sched</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+method_params
+</td>
+<td class="hdlist2">
+<p>&lt;PARCEL ID&gt;</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+request_body
+</td>
+<td class="hdlist2">
+<p>{"type" : "receiving", "sched" : "&lt;TIMESTAMP UTC&gt;"}</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+expected_result
+</td>
+<td class="hdlist2">
+<p>202 {"success": true}</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="http://github.com/blackforest6230">blackforest6230</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+    
+  </body>
+</html>
