@@ -6,3 +6,4 @@ google_analytics:
 theme: jekyll-theme-minimal
 baseurl:
 url: https://tbt-post.github.io/
+repository: tbtapi-docs.git
