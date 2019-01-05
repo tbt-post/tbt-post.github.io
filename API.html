@@ -2,7 +2,8 @@
 layout: default
 title: API
 ---
-
+<!doctype html>
+<html>
 <head>
   <h4>
     {% include navigation.html %}
@@ -14,7 +15,8 @@ title: API
   {% for post in site.posts %}
   <li>
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <p>{{ post.excerpt }}</p>
+    <!-- <p> {{ post.content | markdownify | strip_html | truncatewords: 30 }}</p> -->
   </li>
   {% endfor %}
 </ul>
+</html>
