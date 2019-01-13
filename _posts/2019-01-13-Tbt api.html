@@ -10,7 +10,7 @@ description: Основное api.
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5.dev">
-<meta name="author" content="MelKori">
+<meta name="author" content="TabaTa LLC">
 <title>TbT API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -428,8 +428,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>TbT API</h1>
 <div class="details">
-<span id="author" class="author">MelKori</span><br>
-<span id="email" class="email"><a href="mailto:mieldo@gmail.com">mieldo@gmail.com</a></span><br>
+<span id="author" class="author">TabaTa LLC</span><br>
+<span id="email" class="email"><a href="mailto:info@tbt-post.net">info@tbt-post.net</a></span><br>
 <span id="revnumber">version 1.3.2,</span>
 <span id="revdate">2018-11-01 (1</span>
 <br><span id="revremark">1.3.2): Public API</span>
@@ -586,11 +586,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>во <a href="../README.adoc#_infrastructure">внутренней сети инфраструктуры</a> по
-протоколу HTTP</p>
-</li>
-<li>
-<p>из всех остальных мест <em>вне</em> локальной инфраструктуры - по протоколу HTTPS</p>
+<p>из всех мест <em>вне</em> локальной инфраструктуры - по протоколу HTTPS</p>
 </li>
 </ul>
 </div>
@@ -669,7 +665,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 {get_params}
 </td>
 <td class="hdlist2">
-<p>опциональные GET параметры</p>
+<p>опциональные параметры для метода/обработчика</p>
 </td>
 </tr>
 </table>
@@ -808,6 +804,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Система использует форматы <code>UUID</code> версий <code>v0</code>,<code>v1</code>,<code>v2</code> и <code>v4</code> (форматы <code>v3</code> и <code>v5</code> поддерживаются, но не используются)
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+В случае явного указания в API и/или протоколе версии для типа <code>UUID</code>, подразумевается использование исключительно указанной версии
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Для хранения меток времени <code>created_at</code>,<code>modified_at</code> и т.п. используется <a href="https://tools.ietf.org/html/rfc4122#section-4.2.2">uuid версии 1</a></p>
 </div>
@@ -987,7 +1007,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Все методы api с префиксом op/ предназначениы для операторского интерфейса, и требуют от пользователя соответствующих прав доступа.
+Все методы api с префиксом op/ предназначены для операторского интерфейса, и требуют от пользователя соответствующих прав доступа.
 </td>
 </tr>
 </table>
@@ -1024,6 +1044,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 Для обозначения пустого (осутствующего) содержимого в описании используется <code>----</code>. Использовать его как значение <strong>НЕ РЕКОМЕНДУЕТСЯ</strong>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Для проверки запросов в командной строке/терминале, используйте User-Agent: curl, <strong>не ниже 7.47.0</strong>
 </td>
 </tr>
 </table>
@@ -1197,6 +1229,45 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Пример запроса/ответа</dt>
+<dt class="hdlist1">Запрос</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X POST "https://sandbox-api.tbt-post.net/api/v1/user/reg" \
+-H "Content-Type: application/json" \
+-H "Authorization: Basic dG9rZW46cGFzc3dk" \
+-d '{"email":"examplemail1@exampledomain.io","password":"examplepass", "phone": "380666666667", "first_name": "Vasia", "last_name": "Pipkin", "gender": "male", "prefered_lang" : "ru"}'</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.10.3<br>
+Date: Sat, 12 Jan 2019 13:20:37 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 17<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS<br>
+Access-Control-Max-Age: 600<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Origin: <a href="https://sandbox-ui.tbt-post.net" class="bare">https://sandbox-ui.tbt-post.net</a><br>
+Access-Control-Allow-Headers: Content-Type<br></p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "success": true
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--6"><a class="anchor" href="#true--6"></a>Создание пользователя оператором</h4>
@@ -1256,6 +1327,58 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Пример запроса/ответа</dt>
+<dt class="hdlist1">Запрос</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X POST "https://sandbox-api.tbt-post.net/api/v1/op/user/reg" \
+-b cookie-jar.txt \
+-H "Content-Type: application/json" \
+-d '{"email":"examplemail2@exampledomain.io", "phone": "380666666668", "first_name": "Sara", "last_name": "Pipkin", "gender": "female", "prefered_lang" : "ru", "activate": false}'</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.10.3<br>
+Date: Sat, 12 Jan 2019 14:01:19 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 63<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS<br>
+Access-Control-Max-Age: 600<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Origin: <a href="https://sandbox-ui.tbt-post.net" class="bare">https://sandbox-ui.tbt-post.net</a><br>
+Access-Control-Allow-Headers: Content-Type<br></p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "id": "75c755df-f40a-4c85-a42b-e3c1ddeec93a",
+  "success": true
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+В дальнешем, при использовании учетной записи с правами оператора, будут использованы HTTP cookies
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--7"><a class="anchor" href="#true--7"></a>Потдтверждение регистрации</h4>
@@ -1303,7 +1426,49 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X POST "https://sandbox-api.tbt-post.net/api/v1/otc/new" \
+-H "Content-Type: application/json" \
+-H "Authorization: Basic dG9rZW46cGFzc3dk" \
+-d '{"otc_type": "REGISTRATION", "email": "examplemail2@exampledomain.io"}'</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.10.3<br>
+Date: Sat, 12 Jan 2019 14:17:50 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 17<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS<br>
+Access-Control-Max-Age: 600<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Origin: <a href="https://sandbox-ui.tbt-post.net" class="bare">https://sandbox-ui.tbt-post.net</a><br>
+Access-Control-Allow-Headers: Content-Type<br></p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "success": true
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect4">
@@ -1350,7 +1515,37 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X POST "https://sandbox-api.tbt-post.net/api/v1/otc/validate" \
+-H "Content-Type: application/json" \
+-H "Authorization: Basic dG9rZW46cGFzc3dk" \
+-d '{"otc_type": "REGISTRATION", "otc": "046e053c-c35c-408f-a422-9fe20f50c35b"}'</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>soon..</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">soon..</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1399,7 +1594,49 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X POST https://sandbox-api.tbt-post.net/api/v1/auth/login \
+-H "Content-Type: application/json; charset=utf-8" \
+-d '{"username":"examplemail1@exampledomain.io","password":"examplepass","remember_me":"true"}'</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.10.3<br>
+Date: Sat, 12 Jan 2019 15:17:55 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 37<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS<br>
+Access-Control-Max-Age: 600<br>
+Set-Cookie: TBT_AUTH="2|1:0|10:1547306275|8:TBT_AUTH|48:OTcwY2RmNmQtMWZmOS00MWEzLTg5YmEtZjg1OGE5YjE2OTE2|bb0ce8075b6ac417be6d2fb9fd1e79af7980b52361ae5b2eeffd1240627b447e"; Domain=.tbt-post.net; expires=Mon, 11 Feb 2019 17:31:15 GMT; Path=/<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Origin: <a href="https://sandbox-ui.tbt-post.net" class="bare">https://sandbox-ui.tbt-post.net</a><br>
+Access-Control-Allow-Headers: Content-Type<br></p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "success": true
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1446,7 +1683,49 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X GET "https://sandbox-api.tbt-post.net/api/v1/auth/logout" \
+-H "Content-Type: application/json"</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.10.3<br>
+Date: Sat, 12 Jan 2019 15:21:15 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 17<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS<br>
+Access-Control-Max-Age: 600<br>
+Cache-Control: no-cache, no-store, must-revalidate<br>
+Etag: "484b3032619fa1acd135d114565b0a5166281c22"<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Origin: <a href="https://sandbox-ui.tbt-post.net" class="bare">https://sandbox-ui.tbt-post.net</a><br>
+Access-Control-Allow-Headers: Content-Type<br></p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "success": true
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1495,7 +1774,36 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1542,7 +1850,36 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1589,7 +1926,36 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1605,7 +1971,7 @@ expected_result
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-требует авторизации
+Требует авторизации
 </td>
 </tr>
 </table>
@@ -1652,7 +2018,36 @@ expected_result
 <p>200 {"success": true}</p>
 </td>
 </tr>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1703,6 +2098,83 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X GET "https://sandbox-api.tbt-post.net/api/v1/user/profile" \
+-H "Content-Type: application/json" \
+-b cookie-jar.txt</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.10.3<br>
+Date: Sun, 13 Jan 2019 10:29:00 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 953<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS<br>
+Access-Control-Max-Age: 600<br>
+Etag: "03aceef3d3ae3b3eb91cda7ebfa1677c4838dcc5"<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Origin: <a href="https://sandbox-ui.tbt-post.net" class="bare">https://sandbox-ui.tbt-post.net</a><br>
+Access-Control-Allow-Headers: Content-Type<br></p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "last_name": "Pipkin",
+  "confirmed_at": null,
+  "rate": 0,
+  "roles": [
+    "operator"
+  ],
+  "id": "4f9sd36a-8s22-4fa3-aad5-f656gg6f4ee8",
+  "first_name": "Vasia",
+  "is_confirmed": false,
+  "is_phone_valid": false,
+  "email": "examplemail1@exampledomain.io",
+  "parent": "e0b05432-63a7-4e2e-9c7d-9d1eaaa04b78",
+  "is_disabled": false,
+  "activated_at": "2019-01-13T10:36:07.858583+00:00",
+  "is_active": true,
+  "password_changed": "2019-01-13T10:23:23.643305+00:00",
+  "phone": "380666666667",
+  "birthday": null,
+  "confirmed_by": null,
+  "is_external": true,
+  "nsid": 0,
+  "sourced_by": "Agent",
+  "gender": "male",
+  "created_at": "2019-01-13T10:36:08.177308+00:00",
+  "modified_at": "2019-01-13T10:23:23.710000+00:00",
+  "success": true,
+  "is_badge": false,
+  "is_poor": true,
+  "additional_data": {
+    "foreign_id": 7429614,
+    "last_login": "2019-01-13T10:23:23.325704+00:00"
+  }
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--19"><a class="anchor" href="#true--19"></a>Обновление собственного профиля</h4>
@@ -1713,7 +2185,7 @@ expected_result
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-неактуальные для контекста поля&#8201;&#8212;&#8201;игнорируются. Передавать можно только часть параметров из набора.
+Неактуальные для контекста поля&#8201;&#8212;&#8201;игнорируются. Передавать можно только часть параметров из набора.
 </td>
 </tr>
 </table>
@@ -1761,6 +2233,42 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X PUT "https://sandbox-api.tbt-post.net/api/v1/user/profile" \
+-H "Content-Type: application/json" \
+-b cookie-jar.txt \
+-d '{"first_name": "Vasilii", "last_name": "Pypkin", "gender": "male", "birthday": "1900-12-31&gt;", "prefered_lang": "en"}'</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1829,6 +2337,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--21"><a class="anchor" href="#true--21"></a>Получение базовых данных списка пользователей</h4>
@@ -1895,6 +2436,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1963,6 +2537,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--23"><a class="anchor" href="#true--23"></a>Обновление профиля пользователя</h4>
@@ -2022,6 +2629,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--24"><a class="anchor" href="#true--24"></a>Подтверждение профиля пользователя оператором</h4>
@@ -2068,6 +2708,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2135,6 +2808,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2226,6 +2932,39 @@ expected_result
 </tr>
 </tbody>
 </table>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2288,6 +3027,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--28"><a class="anchor" href="#true--28"></a>Авторизация</h4>
@@ -2334,6 +3106,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -2385,6 +3190,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--31"><a class="anchor" href="#true--31"></a>Подтверждение</h4>
@@ -2431,6 +3269,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -2482,6 +3353,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--33"><a class="anchor" href="#true--33"></a>Подтверждение</h4>
@@ -2528,6 +3432,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -2578,6 +3515,56 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">curl -v -X GET "https://sandbox-api.tbt-post.net/api/v1/user/roles" \
+-H "Content-Type: application/json" \
+-b cookie-jar.txt</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.10.3<br>
+Date: Sun, 13 Jan 2019 10:45:00 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 100<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS<br>
+Access-Control-Max-Age: 600<br>
+Etag: "cf70b22ea6546b1f69cb5fbc06b683d6932caf92"<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Origin: <a href="https://sandbox-ui.tbt-post.net" class="bare">https://sandbox-ui.tbt-post.net</a><br>
+Access-Control-Allow-Headers: Content-Type<br></p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "success": true,
+  "roles": [
+    "user",
+    "operator"
+  ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -2649,6 +3636,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--36"><a class="anchor" href="#true--36"></a>Получение графических кодов</h4>
@@ -2715,6 +3735,39 @@ DATA URI is according to <code>RFC-2397</code>: data:[&lt;media type&gt;][;base6
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2890,6 +3943,39 @@ expected_result
 </tr>
 </tbody>
 </table>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true-id-2"><a class="anchor" href="#true-id-2"></a>Получение посылок по списку id</h4>
@@ -2975,6 +4061,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3098,6 +4217,39 @@ expected_result
 </tr>
 </tbody>
 </table>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--38"><a class="anchor" href="#true--38"></a>Создание посылки</h4>
@@ -3144,6 +4296,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3203,6 +4388,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3273,6 +4491,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--41"><a class="anchor" href="#true--41"></a>Сгруппированный список посылок для отделения</h4>
@@ -3322,6 +4573,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3374,6 +4658,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--43"><a class="anchor" href="#true--43"></a>Трекинговая информация о пользовательских посылках</h4>
@@ -3416,6 +4733,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -3523,6 +4873,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--46"><a class="anchor" href="#true--46"></a>Список адресов отделений</h4>
@@ -3600,6 +4983,39 @@ fc_office
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3680,6 +5096,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--48"><a class="anchor" href="#true--48"></a>Получение списка фильтров (агрегации) адресов</h4>
@@ -3747,8 +5196,50 @@ expected_result
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Дополнительный параметр <code>pattern</code> используется для дополнительной фильтрации результирующего списка фильтров.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Дополнительный параметр <code>pattern</code> используется для дополнительной фильтрации результирующего списка фильтров.
+</td>
+</tr>
+</table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3844,6 +5335,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Для обратного кодирования в теле запроса необходимо указывать координаты.</p>
 </div>
@@ -3890,6 +5414,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3958,6 +5515,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--51"><a class="anchor" href="#true--51"></a>Добавление пользовательского адреса</h4>
@@ -4004,6 +5594,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -4072,6 +5695,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--53"><a class="anchor" href="#true--53"></a>Добавление пользовательского адреса произвольного пользователя</h4>
@@ -4118,6 +5774,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -4181,6 +5870,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -4249,6 +5971,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--57"><a class="anchor" href="#true--57"></a>Удаление ресурса отеления</h4>
@@ -4315,6 +6070,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -4383,6 +6171,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--59"><a class="anchor" href="#true--59"></a>Получение списка ресурсов</h4>
@@ -4450,6 +6271,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true-e"><a class="anchor" href="#true-e"></a>Пeреназначение иерархии для ресурса отделения</h4>
@@ -4505,6 +6359,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -4558,6 +6445,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="true--62"><a class="anchor" href="#true--62"></a>Сообщения для действий по отправлениям</h4>
@@ -4607,6 +6527,39 @@ expected_result
 </td>
 </tr>
 </table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -4658,6 +6611,39 @@ expected_result
 </div>
 <div class="paragraph">
 <p>Для action = <code>parcel_update</code> &lt;BATCH_KEY&gt; является <code>parcel_id</code>, для action = <code>entity_reparent</code> &lt;BATCH_KEY&gt; является <code>entity_id</code></p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -4723,6 +6709,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="true--65"><a class="anchor" href="#true--65"></a>Клиент&#8594;Система</h3>
@@ -4772,6 +6791,39 @@ expected_result
 </tr>
 </table>
 </div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Пример запроса/ответа
+<br>
+Запрос
+</td>
+<td class="hdlist2">
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" data-lang="shell">put text here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ответ</dt>
+<dd>
+<p>put text here</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  put text here
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -4780,7 +6832,7 @@ expected_result
 <div id="footer">
 <div id="footer-text">
 Version 1.3.2<br>
-Last updated 2019-01-04 20:42:20 EET
+Last updated 2019-01-13 17:39:10 EET
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
