@@ -33,19 +33,15 @@
       <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
       {% endif %}
 
-      {% if site.show_downloads %}
-      <ul class="downloads">
-        <li><a href="https://github.com/tbt-post/tbtapi-docs/zipball/master/">Download docs<strong>ZIP File</strong></a></li>
-        <li><a href="https://github.com/tbt-post/tbtapi-docs/tarball/master/">Download docs<strong>TAR Ball</strong></a></li>
-        <li><a href="https://github.com/tbt-post/tbtapi-docs">View docs on <strong>GitHub</strong></a></li>
-      </ul>
-      {% endif %}
       {% case page.description %}
       {% when 'page' %}
       <p style="text-align: center; color: #000000;">
         Contact us, mail: <a id="email" href="mailto:info@tbt-post.net" style="color: #ff99cc;" data-tooltip="Нажмите для копирования">info@tbt-post.net</a>
       </p>
       {% endcase %}
+      <p>
+        {% include navigation.html %}
+      </p>
     </header>
     <section id="topcont-api">
 
