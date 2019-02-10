@@ -17,7 +17,7 @@
 <body>
   <div class="wrapper">
     <header id="top">
-      <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
+      <h1 class="page_top"><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
 
       {% if site.logo %}
       <img src="{{site.logo | relative_url}}" alt="Logo" />
@@ -53,7 +53,7 @@
         {% case page.description %}
         {% when 'page' %}
         <div id="footer">
-          &copy; Все права защищены ©2016-2019 TabaTa LLC
+          &copy; Все права защищены 2016-2019 TabaTa LLC
         </div>
         {% endcase %}
       </footer>

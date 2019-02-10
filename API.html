@@ -10,14 +10,17 @@ description: page
     {% include navigation.html %}
   </h4>
 </head>
-<h2 style="color: #ff99cc;">API docs</h2>
 
-<ul>
-  {% for post in site.posts %}
-  <li>
-    <h2><a href="{{ post.url }}">{{ post.title }}<h6>{{ post.description }}</h6></a></h2>
-    <!-- <p> {{ post.content | markdownify | strip_html | truncatewords: 30 }}</p> -->
-  </li>
-  {% endfor %}
-</ul>
+<body>
+  <h2 class="page_top" style="color: #ff99cc;">API docs</h2>
+
+  <ol class="rounded">
+    {% for post in site.posts %}
+    <li>
+      <h2><a href="{{ post.url }}">{{ post.title }}<h6>{{ post.description }}</h6></a></h2>
+      <!-- <p> {{ post.content | markdownify | strip_html | truncatewords: 30 }}</p> -->
+    </li>
+    {% endfor %}
+  </ol>
+</body>
 </html>
